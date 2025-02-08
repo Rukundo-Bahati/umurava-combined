@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import NavigationBar from "../../CommomComponents/NavigationBar";
-import EditForm from "./EditForm";
 import { useRouter } from "next/navigation";
 import DashboardLayout from "@/app/CommomComponents/DashboardLayout";
+import Edit from "./edit";
 
 const EditChallenge: React.FC = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const EditChallenge: React.FC = () => {
           actionText="Edit Challenge"
           onActionClick={handleEditChallenge}
         />
-        <EditForm />
+        <Edit />
       </DashboardLayout>
     </div>
   );
