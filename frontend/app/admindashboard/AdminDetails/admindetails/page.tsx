@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import DashboardLayout from "@/app/CommomComponents/DashboardLayout";
 import NavigationBar from "@/app/CommomComponents/NavigationBar";
 import ProjectBrief from "./projectBrief";
+import Brief from "./brief";
 
 const AdminDetails: React.FC = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const AdminDetails: React.FC = () => {
           onActionClick={handleCreateChallenge}
         />
          <div className="mt-[80px] px-6">
-         <ProjectBrief />
+         <Brief />
          </div>
       </DashboardLayout>
     </div>
