@@ -16,13 +16,11 @@ const AdminDetails = () => {
             <ProjectBrief />
           </div>
 
-          {/* Admin Instructions on the Right */}
           <div className="flex-1">
             <AdminInstructions />
           </div>
         </div>
 
-        {/* Participants Section under Instructions */}
         <div className="mt-6">
           <ParticipantsPage />
         </div>

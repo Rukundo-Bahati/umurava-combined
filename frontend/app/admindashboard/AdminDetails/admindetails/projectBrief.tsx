@@ -1,16 +1,18 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Mail, FileText, Calendar, DollarSign } from "lucide-react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
-import router from "next/router";
 import { fetchChallengeById } from "@/store/challengesSlice";
 
 export default function ProjectBrief() {
   const searchParams = useSearchParams();
   const challengeId = searchParams.get("id");
+  const router = useRouter(); // Corrected router import
 
   const dispatch = useDispatch<AppDispatch>();
   const { challenge, loading, error } = useSelector(
@@ -19,21 +21,13 @@ export default function ProjectBrief() {
 
   useEffect(() => {
     if (challengeId) {
-      dispatch(fetchChallengeById(challengeId));  // Dispatch the action with the challengeId
+      dispatch(fetchChallengeById(challengeId));
     }
   }, [challengeId, dispatch]);
 
-  if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center mt-10 text-red-500">{error}</div>;
-  }
-
-  if (!challenge) {
-    return <div className="text-center mt-10 text-red-500">Challenge not found</div>;
-  }
+  if (loading) return <div className="text-center mt-10">Loading...</div>;
+  if (error) return <div className="text-center mt-10 text-red-500">{error}</div>;
+  if (!challenge) return <div className="text-center mt-10 text-red-500">Challenge not found</div>;
 
   const handleEdit = () => {
     router.push(`/admindashboard/EditChallenge?id=${challengeId}`);
@@ -53,8 +47,8 @@ export default function ProjectBrief() {
 
           {/* Project Title */}
           <div>
-            <h2 className="text-xl font-bold">Project Brief: {challenge.title}</h2>
-            <p className="text-gray-700 my-3">{challenge.description}</p>
+            <h2 className="text-xl font-bold">Project Brief: {challenge.title || "N/A"}</h2>
+            <p className="text-gray-700 my-3">{challenge.description || "No description available."}</p>
           </div>
 
           {/* Tasks Section */}
@@ -73,45 +67,57 @@ export default function ProjectBrief() {
             </p>
 
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-blue-600" />
+              {/* Email */}
+              {challenge.email && (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <div className="font-medium">{challenge.email}</div>
+                    <div className="text-sm text-gray-500">Contact Email</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-medium">{challenge.email}</div>
-                  <div className="text-sm text-gray-500">Contact Email</div>
-                </div>
-              </div>
+              )}
 
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <FileText className="w-5 h-5 text-blue-600" />
+              {/* Skills */}
+              {challenge.skills?.length ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <FileText className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <div className="font-medium">{challenge.skills.join(", ")}</div>
+                    <div className="text-sm text-gray-500">Skills</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-medium">{challenge.skills.join(", ")}</div>
-                  <div className="text-sm text-gray-500">Skills</div>
-                </div>
-              </div>
+              ) : null}
 
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-blue-600" />
+              {/* Timeline */}
+              {challenge.timeline && (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <div className="font-medium">{challenge.timeline}</div>
+                    <div className="text-sm text-gray-500">Timeline</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-medium">{challenge.timeline}</div>
-                  <div className="text-sm text-gray-500">Timeline</div>
-                </div>
-              </div>
+              )}
 
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 text-blue-600" />
+              {/* Money Prize */}
+              {challenge.prize && (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <DollarSign className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <div className="font-medium">${challenge.prize}</div>
+                    <div className="text-sm text-gray-500">Money Prize</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-medium">${challenge.prize}</div>
-                  <div className="text-sm text-gray-500">Money Prize</div>
-                </div>
-              </div>
+              )}
             </div>
 
             <div className="flex gap-3">
