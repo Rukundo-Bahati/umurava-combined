@@ -1,5 +1,0 @@
-{
-    "MONGO_URI" : "connection",
-    "PORT" : "port",
-    "JWTKEY" : "key"
-  }
