@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { createChallengeAPI } from "@/services/challengeService";
 
-const API_URL = "http://localhost:5000/api/challenges";
+// const API_URL = "http://localhost:5000/api/challenges";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 // Define Challenge Types
 interface Challenge {
@@ -63,7 +64,7 @@ const initialState = {
 export const fetchChallenges = createAsyncThunk(
   "challenges/fetchAll",
   async () => {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}`);
     if (!response.ok) {
       throw new Error("Failed to fetch challenges");
     }

@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 
-const API_URL = "http://localhost:5000/api/challenges";
+// const API_URL = "http://localhost:5000/api/challenges";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 // Define action types
 export const CREATE_CHALLENGE_REQUEST = 'CREATE_CHALLENGE_REQUEST';
@@ -83,7 +84,7 @@ export const createChallenge = createAsyncThunk(
   "challenges/create",
   async (challengeData: ChallengeData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/challenges/create", challengeData);
+      const response = await axios.post(`${API_URL}/create`, challengeData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -100,7 +101,7 @@ export const fetchChallengeById = createAsyncThunk<Challenge[], string>(
   "challenges/fetchById",
   async (challengeId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/challenges/${challengeId}`);
+      const response = await axios.get(`${API_URL}/${challengeId}`);
       return response.data; // Assume this is a single challenge
     } catch (error) {
       return rejectWithValue(

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/challenges/create"; 
-
+// const API_URL = "http://localhost:5000/api/challenges/create"; 
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 interface ChallengeData {
     title: string;
     deadline: string;
@@ -18,7 +18,7 @@ interface ChallengeData {
 // Function to create a new challenge
 export const createChallengeAPI = async (challengeData: ChallengeData) => {
     try {
-      const response = await axios.post(API_URL, challengeData); 
+      const response = await axios.post(`${API_URL}`, challengeData); 
       return response; // Ensure this returns a response object that has a 'data' property
     } catch (error) {
       throw error;
