@@ -6,7 +6,9 @@ const HeroSection: React.FC = () => {
   return (
     <section className="relative flex flex-col-reverse lg:flex-row items-center justify-between px-6 md:px-12 py-16 space-y-10 lg:space-y-0">
       {/* Left Text Section */}
-      <div className="w-full lg:w-1/2 text-center lg:text-left">
+      <div
+        className="w-full lg:w-1/2 text-center lg:text-left opacity-0 translate-x-[-50px] animate-fadeIn transition-all duration-1000 ease-in-out"
+      >
         <h1 className="text-3xl md:text-4xl font-bold text-[#2B71F0] lg:ml-10">
           Build Work Experience through Skills Challenges Program
         </h1>
@@ -21,7 +23,9 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Right Image Section */}
-      <div className="relative w-full lg:w-1/2 flex justify-center">
+      <div
+        className="relative w-full lg:w-1/2 flex justify-center opacity-0 translate-x-[50px] animate-fadeIn transition-all duration-1000 ease-in-out"
+      >
         <Image
           src="/images/homepage.png"
           alt="home_page_photo"

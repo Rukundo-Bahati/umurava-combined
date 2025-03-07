@@ -4,7 +4,7 @@ import { Card, CardContent } from "../../components/ui/card";
 export default function About() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 opacity-0 translate-y-10 animate-fadeIn">
         <h1 className="text-3xl md:text-4xl font-bold text-[#03192E] mb-4">
           Experience a New Way of Building
           <br />
@@ -17,7 +17,7 @@ export default function About() {
       </div>
 
       <div className="grid gap-6">
-        <Card className="bg-[#2B71F0]">
+        <Card className="bg-[#2B71F0] opacity-0 translate-x-10 animate-slideIn">
           <CardContent className="p-8">
             <div className="mb-4">
               <BriefcaseBusiness className="w-8 h-8 text-white" />
@@ -28,7 +28,7 @@ export default function About() {
             <p className="text-white/90">
               Tackle real-world projects through challenges and hackathons that
               mirror real-world challenges faced by businesses and
-              organizations. Therefore, showcase your skills and accomplishments
+              organizations. Showcase your skills and accomplishments
               to potential employers and clients through a portfolio of
               completed projects.
             </p>
@@ -36,7 +36,7 @@ export default function About() {
         </Card>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Card className="bg-[#2B71F0] text-white">
+          <Card className="bg-[#2B71F0] text-white opacity-0 translate-x-10 animate-slide-in">
             <CardContent className="p-8">
               <div className="mb-4">
                 <BriefcaseBusiness className="w-8 h-8 text-white" />
@@ -51,7 +51,7 @@ export default function About() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#2B71F0] text-white">
+          <Card className="bg-[#2B71F0] text-white opacity-0 translate-x-10 animate-slide-in">
             <CardContent className="p-8">
               <div className="mb-4">
                 <BriefcaseBusiness className="w-8 h-8 text-white" />
